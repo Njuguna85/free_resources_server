@@ -15,11 +15,14 @@ app.use(express.json({ limit: "40mb" }));
 app.use(express.urlencoded({ limit: "40mb", extended: true }));
 
 app.get("/", function (req, res) {
-  res.send("Abonten Backend");
+  res.send("Free resources Backend");
 });
 
 // protect the http headers with helment
 app.use(helmet());
+
+// routes
+app.use("/api/users", require("./routes/users"));
 
 const port = process.env.PORT;
 

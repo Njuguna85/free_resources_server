@@ -1,7 +1,7 @@
 require("dotenv").config({ path: __dirname + "/.env" });
 // require('dotenv').config({path: `${process.cwd()}/.env`})
 
-const { DB_HOST, DB_NAME, DB_PASS, DB_USER, DB_DIALECT } = process.env;
+const { DB_HOST, DB_NAME, DB_PASS, DB_USER, DB_DIALECT ,DB_TEST_NAME} = process.env;
 
 module.exports = {
   development: {
