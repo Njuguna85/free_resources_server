@@ -1,0 +1,33 @@
+{
+  "name": "freeresources",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/Njuguna85/freeresources.git"
+  },
+  "author": "Njuguna85",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Njuguna85/freeresources/issues"
+  },
+  "homepage": "https://github.com/Njuguna85/freeresources#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "helmet": "^5.1.0",
+    "jsonwebtoken": "^8.5.1",
+    "nodemon": "^2.0.16",
+    "pg": "^8.7.3",
+    "sequelize": "^6.19.2"
+  },
+  "devDependencies": {
+    "sequelize-cli": "^6.4.1"
+  }
+}
