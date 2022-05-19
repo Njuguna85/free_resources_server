@@ -1,4 +1,5 @@
 const crypto = require("crypto");
+const generateToken = require("../../helpers/jwt");
 
 module.exports = function makeAddUser({ buildUser }, userDb) {
   return async function addUser(userInfo) {
@@ -24,9 +25,20 @@ module.exports = function makeAddUser({ buildUser }, userDb) {
 
     let message;
     if (newUser) {
-      // send email
+      // TODO:send email
 
-      return { user: newUser };
+    const token = generateToken(user);
+
+
+      return { 
+        data: {
+          userId: newUser.id,
+          fullName: newUser.fullName,
+          isVerified: newUser.isVerified,
+          email: newUser.email,
+          token: token,
+        },
+       };
     } else {
       message = "Error Creating User.";
       return { error: { message } };

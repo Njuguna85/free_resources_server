@@ -2,7 +2,12 @@ const api500Error = require("../../helpers/errors/api500Error");
 const { logError } = require("../../helpers/errors/errorHandler");
 
 module.exports = function query({ models }) {
-  return Object.freeze({ selectOne, insertNewUser , checkUserExists});
+  return Object.freeze({
+    selectOne,
+    insertNewUser,
+    checkUserExists,
+    selectByEmail,
+  });
 
   async function checkUserExists({ paramType, paramValue }) {
     /**
@@ -18,7 +23,7 @@ module.exports = function query({ models }) {
         where: { [param]: value },
       });
 
-      return !!(user);
+      return !!user;
     } catch (err) {
       console.error("Error Fecthing User", err);
     }
@@ -43,7 +48,7 @@ module.exports = function query({ models }) {
       );
 
       await tr.commit();
-      user = await selectOne(user.id);
+      user = await selectByEmail(user.email);
 
       return user;
     } catch (err) {
@@ -62,6 +67,19 @@ module.exports = function query({ models }) {
       });
       if (user) return user;
       return { error: { message: "User Not found" } };
+    } catch (err) {
+      console.error("Error Fetching User", err);
+    }
+  }
+
+  async function selectByEmail(email) {
+    try {
+      let user = await models.User.findOne({
+        where: { email: email },
+        attributes: ["email", "password", "id", "fullName", "isVerified"],
+      });
+
+      return user;
     } catch (err) {
       console.error("Error Fetching User", err);
     }
