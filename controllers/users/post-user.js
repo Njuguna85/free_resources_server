@@ -4,7 +4,7 @@ module.exports = function makePostUser({ addUser }) {
       "Content-Type": "application/json",
     };
     try {
-      const data = await addUser(httpRequest.body);
+      const data = await addUser(httpRequest.body.payLoad);
 
       return {
         headers,
