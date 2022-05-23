@@ -19,7 +19,7 @@ module.exports = function makeAddUser({ buildUser }, userDb) {
       paramType: { param: "email" },
       paramValue: { param: user.email },
     });
-    if (exist) return { error: { message: "Email Already taken" } };
+    if (exist) throw new Error("Email Already taken");
 
     const newUser = await userDb.insertNewUser(user);
 
@@ -27,10 +27,9 @@ module.exports = function makeAddUser({ buildUser }, userDb) {
     if (newUser) {
       // TODO:send email
 
-    const token = generateToken(user);
+      const token = generateToken(user);
 
-
-      return { 
+      return {
         data: {
           userId: newUser.id,
           fullName: newUser.fullName,
@@ -38,7 +37,7 @@ module.exports = function makeAddUser({ buildUser }, userDb) {
           email: newUser.email,
           token: token,
         },
-       };
+      };
     } else {
       message = "Error Creating User.";
       return { error: { message } };

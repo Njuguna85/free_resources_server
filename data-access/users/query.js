@@ -25,7 +25,8 @@ module.exports = function query({ models }) {
 
       return !!user;
     } catch (err) {
-      console.error("Error Fecthing User", err);
+      logError({ msg: "Error fetching user", err });
+      throw err;
     }
   }
 
@@ -53,7 +54,9 @@ module.exports = function query({ models }) {
       return user;
     } catch (err) {
       await tr.rollback();
-      console.error("Error Adding User", err);
+      logError({ msg: "Error adding user", err });
+      throw err;
+    
     }
   }
 
@@ -68,7 +71,9 @@ module.exports = function query({ models }) {
       if (user) return user;
       return { error: { message: "User Not found" } };
     } catch (err) {
-      console.error("Error Fetching User", err);
+     
+      logError({ msg: "Error fetching user", err });
+      throw err;
     }
   }
 
@@ -81,7 +86,9 @@ module.exports = function query({ models }) {
 
       return user;
     } catch (err) {
-      console.error("Error Fetching User", err);
+     
+      logError({ msg: "Error fetching user", err });
+      throw err;
     }
   }
 };

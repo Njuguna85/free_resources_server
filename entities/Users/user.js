@@ -7,7 +7,7 @@ module.exports = function makeBuildUser(encrypt) {
     password,
   } = {}) {
     if (!fullName) {
-      throw new Error("User must have a First Name");
+      throw new Error("User must have a Full Name");
     }
     if (!email) {
       throw new Error("User must have an email");
