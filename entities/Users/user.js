@@ -1,11 +1,5 @@
 module.exports = function makeBuildUser(encrypt) {
-  return async function buildUser({
-    fullName,
-    email,
-    organization,
-    is_verified = false,
-    password,
-  } = {}) {
+  return function buildUser({ fullName, email, organization } = {}) {
     if (!fullName) {
       throw new Error("User must have a Full Name");
     }
@@ -15,17 +9,11 @@ module.exports = function makeBuildUser(encrypt) {
     if (!organization) {
       throw new Error("User must have an Organization");
     }
-    if (!password) {
-      throw new Error("User must have a Password");
-    }
-    let pwd = await encrypt(password);
 
     return Object.freeze({
       getFullName: () => fullName,
       getEmail: () => email,
       getOrganization: () => organization,
-      getIsVerified: () => is_verified,
-      getPassword: () => pwd,
     });
   };
 };

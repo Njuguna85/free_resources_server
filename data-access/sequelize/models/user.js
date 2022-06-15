@@ -19,10 +19,6 @@ module.exports = (sequelize, DataTypes) => {
       },
       fullName: DataTypes.STRING,
       organization: DataTypes.STRING,
-      password: DataTypes.STRING,
-      isVerified: DataTypes.BOOLEAN,
-      resetPasswordToken: DataTypes.STRING,
-      verificationToken: DataTypes.STRING,
     },
     {
       sequelize,

@@ -1,6 +1,5 @@
 const makeBuildUser = require("./user");
-const { encrypt } = require("../../helpers/hash/index");
 
-const buildUser = makeBuildUser(encrypt);
+const buildUser = makeBuildUser();
 
 module.exports = { buildUser };

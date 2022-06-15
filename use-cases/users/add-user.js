@@ -1,25 +1,14 @@
-const crypto = require("crypto");
 const generateToken = require("../../helpers/jwt");
 
 module.exports = function makeAddUser({ buildUser }, userDb) {
   return async function addUser(userInfo) {
-    let user = await buildUser(userInfo);
-    const token = crypto.randomBytes(32).toString("hex");
+    let user = buildUser(userInfo);
 
     user = {
       fullName: user.getFullName(),
       email: user.getEmail(),
       organization: user.getOrganization(),
-      is_verified: user.getIsVerified(),
-      password: user.getPassword(),
-      verificationToken: token,
     };
-
-    const exist = await userDb.checkUserExists({
-      paramType: { param: "email" },
-      paramValue: { param: user.email },
-    });
-    if (exist) throw new Error("Email Already taken");
 
     const newUser = await userDb.insertNewUser(user);
 
@@ -33,7 +22,6 @@ module.exports = function makeAddUser({ buildUser }, userDb) {
         data: {
           userId: newUser.id,
           fullName: newUser.fullName,
-          isVerified: newUser.isVerified,
           email: newUser.email,
           token: token,
         },
