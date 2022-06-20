@@ -12,7 +12,7 @@ module.exports = function query({ models }) {
 
     try {
       let user;
-      user = await models.User.findOne({ where: { email: data.email } });
+      user = await selectByEmail(data.email);
       if (!user) {
         user = await models.User.create(
           {

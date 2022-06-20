@@ -6,9 +6,6 @@ module.exports = function makeBuildUser(encrypt) {
     if (!email) {
       throw new Error("User must have an email");
     }
-    if (!organization) {
-      throw new Error("User must have an Organization");
-    }
 
     return Object.freeze({
       getFullName: () => fullName,
